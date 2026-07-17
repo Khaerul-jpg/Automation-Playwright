@@ -11,11 +11,20 @@ Proyek ini berisi *script* otomatisasi pengujian (automation testing) menggunaka
 - `tests/` : Kumpulan *script* pengujian utama.
 - `utils/` : Berisi fungsi-fungsi *helper* atau utilitas yang dapat digunakan ulang di berbagai *script* pengujian.
 
-## 🚀 Cara Menjalankan (menggunakan Docker)
+## 🛠️ Persiapan Awal (Instalasi)
 
-Proyek ini telah dikemas ke dalam *image* Docker. Anda tidak perlu menginstal dependensi Python atau Playwright secara lokal untuk menjalankan pengujian.
+Sebelum menjalankan pengujian, pastikan Anda sudah melakukan instalasi berikut:
 
-Pastikan **Docker** sudah terinstal dan berjalan di mesin Anda. Untuk menjalankan *test suite* (contoh: `set_personal_info.py`), gunakan perintah berikut di terminal:
+### 1. Download & Install Docker
+Docker dibutuhkan untuk menjalankan *script* pengujian secara instan di dalam *container* yang terisolasi.
+- Unduh Docker Desktop sesuai dengan sistem operasi Anda melalui situs resminya: [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- Lakukan instalasi dan pastikan aplikasi Docker sudah dalam keadaan berjalan (*running*) di komputer Anda.
 
+### 2. Download & Install Playwright (Untuk Pengujian Lokal)
+Jika Anda hanya ingin menggunakan Docker, Anda bisa melewati langkah ini. Namun, jika Anda ingin memodifikasi atau menjalankan *script* secara lokal, instal Playwright dengan perintah berikut di terminal Anda:
 ```bash
-docker run --rm khaerulrafli/playwright-automation:v11 pytest -s --log-cli-level=INFO "Personal Information-Field/set_personal_info.py" --env=dev --username=<ISI_USERNAME_ANDA> --password=<ISI_PASSWORD_ANDA>
+# Instal dependensi pytest dan playwright
+pip install pytest-playwright
+
+# Download browser pendukung (Chromium, Firefox, WebKit)
+playwright install
