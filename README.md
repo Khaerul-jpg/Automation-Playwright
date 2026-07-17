@@ -28,3 +28,32 @@ pip install pytest-playwright
 
 # Download browser pendukung (Chromium, Firefox, WebKit)
 playwright install
+```
+
+## 🐳 Manajemen Docker (Bila Ada Perubahan Kode)
+
+Jika ada pembaruan pada *script* atau kode di dalam repository ini, Anda perlu membuat ulang (*rebuild*) image Docker agar perubahan tersebut tersimpan.
+
+```bash
+# 1. Build image baru (contoh menggunakan tag v11)
+docker build -t khaerulrafli/playwright-automation:v11 .
+
+# 2. Push image ke Docker Hub
+docker push khaerulrafli/playwright-automation:v11
+```
+
+## 🚀 Cara Menjalankan (menggunakan Docker)
+
+Proyek ini telah dikemas ke dalam *image* Docker. Anda tidak perlu menginstal dependensi Python atau Playwright secara lokal untuk menjalankan pengujian.
+
+Pastikan **Docker** sudah terinstal dan berjalan di mesin Anda. Untuk menjalankan *test suite* (contoh: `set_personal_info.py`), gunakan perintah berikut di terminal:
+
+```bash
+docker run --rm khaerulrafli/playwright-automation:v11 pytest -s --log-cli-level=INFO "Personal Information-Field/set_personal_info.py" --env=dev --username=<ISI_USERNAME_ANDA> --password=<ISI_PASSWORD_ANDA>
+```
+
+**Penjelasan Perintah:**
+- `--rm` : Menghapus *container* secara otomatis setelah pengujian selesai berjalan.
+- `khaerulrafli/playwright-automation:v11` : *Image* dan tag Docker yang digunakan.
+- `--log-cli-level=INFO` : Menampilkan log eksekusi pengujian secara detail di terminal.
+- `--env`, `--username`, `--password` : Argumen khusus yang dikirimkan ke Pytest untuk kebutuhan *login* dan pemilihan *environment*.
